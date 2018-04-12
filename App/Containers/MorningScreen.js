@@ -75,7 +75,7 @@ export default class MorningScreen extends Component {
 
           <Text style={styles.savingStyle}>45€</Text>
           <Text style={{ color: "#fff", fontSize: 28 }}>from yesterday</Text>
-        </ScrollView>
+        </ScrollView>  
 
         <FullButton
           onPress={() => navigate("LaunchScreen")}

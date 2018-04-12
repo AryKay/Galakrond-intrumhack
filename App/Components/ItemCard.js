@@ -11,6 +11,7 @@ import {
 } from 'react-native';
 import PropTypes from 'prop-types';
 import ProgressBar from './ProgressBar'
+import { Header } from 'react-native-elements'
 
 export class ItemCard extends React.Component {
 
@@ -112,7 +113,20 @@ export class ItemCard extends React.Component {
               height: this.state.heightAnim
             }
           ]}>
-
+          {
+            this.props.selected ?
+                      <Header
+           leftComponent={        <TouchableOpacity
+          onPress={this.props.onClose}
+          style={{ marginTop: 36, marginStart: 10 }}
+        >
+          <Image source={closeIcon} style={{ width: 18, height: 18 }} />
+        </TouchableOpacity>}
+          centerComponent={{ text: "Goals", style: { color: "#fff" } }}
+          // rightComponent={{ icon: "home", color: "#fff" }}
+          outerContainerStyles={{ backgroundColor: "#222A33" }}
+        /> : null
+          }
           <ImageBackground
             onLayout={this.props.onLayout}
             borderRadius={this.props.selected ? 0 : (this.props.borderRadius || 10)}
@@ -122,10 +136,6 @@ export class ItemCard extends React.Component {
               { height: this.props.height || 150 }
             ]}
           >
-          {
-            this.props.selected ?
-              <View style={{width: 50, height: 50}}/> : null
-          }
            <View style={{width: 300, height: 70, backgroundColor: 'white', flexDirection: 'row', alignItems: 'flex-end'}}>
               <Image
                 style={{width: 50, height: 50, marginRight: 15, marginTop: 10, marginBottom: 10}}
@@ -148,24 +158,18 @@ export class ItemCard extends React.Component {
             <View style={{flex: 1}}>
               <Text style={{textAlign: 'right', color: '#A9A9A9'}}>{this.props.progress*100}% completed</Text>
             </View>
-          </View>           
-            {
-              this.props.selected ?
-                <TouchableWithoutFeedback onPress={this.props.onClose} >
-                  <View style={{
-                    position: 'absolute',
-                    top: 15,
-                    left: 15
-                  }}>
-                    {this.props.closeIcon || <Text style={{fontSize: 30}}>X</Text>}
-                  </View>  
-                </TouchableWithoutFeedback> : null
-            }
+          </View>
+          {
+            this.props.selected ?
+           <Image
+                style={{width: 300, height: 200, marginLeft: 10, marginTop: 165}}
+                source={require("../Images/chart.png")}
+           /> : null }           
           </ImageBackground>
  
           {
             this.props.selected ?
-              <View style={{flex: 1, padding: 20, marginTop: 30}}>
+              <View style={{flex: 1, padding: 20}}>
                 {this.props.content || <Text>Content!</Text>}
               </View> : null
           }
@@ -176,6 +180,7 @@ export class ItemCard extends React.Component {
 
 }
 
+const closeIcon = require("../Images/close-icon.png");
 
 const styles = StyleSheet.create({
 

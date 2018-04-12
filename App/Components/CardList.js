@@ -87,7 +87,7 @@ export default class CardList extends React.Component {
         ...state,
         selected: selected,
         zoomedStyle: {
-          transform: [{ scale: this.state.zoomAnim }, { translateY: viewWidth * 0.5 * (scale - 1)  }]
+          transform: [{ scale: this.state.zoomAnim }, { translateY: viewWidth * -1.3 * (scale - 1)  }]
         },
         maxHeight: maxHeight
       });
@@ -95,7 +95,7 @@ export default class CardList extends React.Component {
     });
 
   }
-
+ 
   _onCloseItem = ({ item, index }) => {
     this.setState(state => {
 
@@ -133,6 +133,7 @@ export default class CardList extends React.Component {
   render() {
     return (
       <Animated.View style={[{ flex: 1 }, this.state.zoomedStyle]}>
+
         <FlatList
           ref={c => this._flatList = c}
           style={[{
