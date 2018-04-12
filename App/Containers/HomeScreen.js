@@ -2,8 +2,6 @@ import React, { Component } from "react";
 import { ScrollView, Text, Image, View, StatusBar } from "react-native";
 import { Card, Button, Header } from "react-native-elements";
 import { Images } from "../Themes";
-import ItemCard from "../Components/ItemCard";
-import CardList from "../Components/CardList";
 
 // Styles
 import styles from "./Styles/LaunchScreenStyles";
@@ -32,24 +30,24 @@ const cards = [
 ];
 
 // TODO: create buttons, replace header components with custom ones
-export default class LaunchScreen extends Component {
+export default class HomeScreen extends Component {
   render() {
     const { navigate } = this.props.navigation;
 
     return (
       <View style={styles.mainContainer}>
         <Header
-          leftComponent={{ icon: "menu", color: "#fff" }}
-          centerComponent={{ text: "Goals", style: { color: "#fff" } }}
-          rightComponent={{ icon: "home", color: "#fff" }}
+          // leftComponent={{ icon: "menu", color: "#fff" }}
+          centerComponent={{ text: "Home", style: { color: "#fff" } }}
+          // rightComponent={{ icon: "home", color: "#fff" }}
           outerContainerStyles={{ backgroundColor: "#000000" }}
         />
-        <Button
+        {/* <Button
           title="Go to morning"
           onPress={() => navigate("MorningScreen", { name: "Jane" })}
         />
         <StatusBar barStyle="light-content" hidden={false} />
-        <CardList cards={cards} />
+        <CardList cards={cards} /> */}
       </View>
     );
   }
