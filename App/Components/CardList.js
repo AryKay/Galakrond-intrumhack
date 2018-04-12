@@ -8,6 +8,7 @@ import {
 } from 'react-native';
 import PropTypes from 'prop-types';
 import { ItemCard } from './ItemCard';
+import Colors from '../Themes/Colors'
 
 export default class CardList extends React.Component {
 
@@ -125,6 +126,8 @@ export default class CardList extends React.Component {
       maxHeight={this.state.maxHeight}
       selected={this.state.selected.get(item.id)}
       heightDuration={this.props.duration}
+      progress={item.progress}
+      price={item.price}
     />  
 
   render() {
@@ -134,7 +137,7 @@ export default class CardList extends React.Component {
           ref={c => this._flatList = c}
           style={[{
             flex: 1,
-            backgroundColor: 'white'
+            backgroundColor: Colors.background
           }, this.props.listStyle]}
           data={this.props.cards}
           scrollEnabled={true}

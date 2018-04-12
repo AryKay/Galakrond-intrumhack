@@ -6,22 +6,25 @@ import {
   Text,
   View,
   StyleSheet,
-  TouchableWithoutFeedback
+  TouchableWithoutFeedback,
+  Image
 } from 'react-native';
 import PropTypes from 'prop-types';
+import ProgressBar from './ProgressBar'
 
 export class ItemCard extends React.Component {
 
   static propTypes = {
     title: PropTypes.string.isRequired,
-    picture: PropTypes.any.isRequired,
+    picture: PropTypes.any,
     selected: PropTypes.bool,
     height: PropTypes.number,
     maxHeight: PropTypes.number,
     onPress: PropTypes.func,
     onLayout: PropTypes.func,
     onClose: PropTypes.func,
-
+    progress: PropTypes.number,
+    price: PropTypes.number,
     activeOpacity: PropTypes.number,
 
     shrinkTo: PropTypes.number,
@@ -41,7 +44,7 @@ export class ItemCard extends React.Component {
     super(props);
 
     this.state = {
-      heightAnim: new Animated.Value(this.props.height || 200),
+      heightAnim: new Animated.Value(this.props.height || 150),
       scaleAnim: new Animated.Value(1),
       selected: this.props.selected
     }    
@@ -83,7 +86,7 @@ export class ItemCard extends React.Component {
 
     if (!nextProps.selected && this.props.selected) {
       Animated.timing(this.state.heightAnim, {
-        toValue: nextProps.height || 200,
+        toValue: nextProps.height || 150,
         duration: nextProps.heightDuration || 260
       }).start()
     }
@@ -113,15 +116,39 @@ export class ItemCard extends React.Component {
           <ImageBackground
             onLayout={this.props.onLayout}
             borderRadius={this.props.selected ? 0 : (this.props.borderRadius || 10)}
-            source={this.props.picture}
+            source={null}
             style={[
               styles.image,
-              { height: this.props.height || 200 }
+              { height: this.props.height || 150 }
             ]}
           >
-            <Text style={[styles.text, this.props.textStyle]}>
-              {this.props.title}
-            </Text>
+          {
+            this.props.selected ?
+              <View style={{width: 50, height: 50}}/> : null
+          }
+           <View style={{width: 300, height: 70, backgroundColor: 'white', flexDirection: 'row', alignItems: 'flex-end'}}>
+              <Image
+                style={{width: 50, height: 50, marginRight: 15, marginTop: 10, marginBottom: 10}}
+                source={this.props.picture}
+             />
+              <Text style={[styles.text, this.props.textStyle]}>
+                {this.props.title}
+              </Text>
+           </View>
+          <ProgressBar
+            fillStyle={{}}
+            backgroundStyle={{backgroundColor: '#DEE6EF', borderRadius: 2}}
+            style={{marginTop: 10, width: 300}}
+            progress={this.props.progress}
+          />
+          <View style={{flex: 1, flexDirection: 'row'}}>
+            <View style={{flex: 1}}>
+              <Text style={{color: '#A9A9A9'}}>{this.props.price*this.props.progress}€ of {this.props.price}€</Text>
+            </View>
+            <View style={{flex: 1}}>
+              <Text style={{textAlign: 'right', color: '#A9A9A9'}}>{this.props.progress*100}% completed</Text>
+            </View>
+          </View>           
             {
               this.props.selected ?
                 <TouchableWithoutFeedback onPress={this.props.onClose} >
@@ -135,10 +162,10 @@ export class ItemCard extends React.Component {
                 </TouchableWithoutFeedback> : null
             }
           </ImageBackground>
-
+ 
           {
             this.props.selected ?
-              <View style={{flex: 1, padding: 20}}>
+              <View style={{flex: 1, padding: 20, marginTop: 30}}>
                 {this.props.content || <Text>Content!</Text>}
               </View> : null
           }
@@ -155,8 +182,10 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     borderRadius: 10,
-    backgroundColor: 'rgb(240, 240, 240)',    
-    margin: 20,
+    backgroundColor: '#ffffff',    
+    marginLeft: 20,
+    marginRight: 20,
+    marginTop: 20,
     padding: 0
   },
   image: {
@@ -164,14 +193,16 @@ const styles = StyleSheet.create({
     height: 200,
     padding: 20,
     margin: 0,
-    flexDirection: 'row',
+    flexDirection: 'column',
     alignItems: 'flex-end'
   },
   text: {
     backgroundColor: 'transparent',
     color: 'black',
     fontWeight: '700',
-    fontSize: 44
+    fontSize: 20,
+    display: 'flex',
+    marginBottom: 25
   }
 
 });
