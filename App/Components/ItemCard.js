@@ -6,11 +6,9 @@ import {
   Text,
   View,
   StyleSheet,
-  TouchableWithoutFeedback,
-  Modal
+  TouchableWithoutFeedback
 } from 'react-native';
 import PropTypes from 'prop-types';
-import Goal from './Goal';
 
 export class ItemCard extends React.Component {
 
@@ -19,7 +17,7 @@ export class ItemCard extends React.Component {
     picture: PropTypes.any.isRequired,
     selected: PropTypes.bool,
     height: PropTypes.number,
-    maxHeight: PropTypes.number, 
+    maxHeight: PropTypes.number,
     onPress: PropTypes.func,
     onLayout: PropTypes.func,
     onClose: PropTypes.func,
@@ -45,15 +43,9 @@ export class ItemCard extends React.Component {
     this.state = {
       heightAnim: new Animated.Value(this.props.height || 200),
       scaleAnim: new Animated.Value(1),
-      selected: this.props.selected,
-      showModal: false
+      selected: this.props.selected
     }    
 
-  }
-
-  toggleModal = () => {
-    console.log(this.state.showModal);
-    this.setState({ showModal: !this.state.showModal })
   }
 
   _onPresIn = () => {
@@ -101,15 +93,12 @@ export class ItemCard extends React.Component {
   render() {
     return (
       <TouchableOpacity
-        activeOpacity={this.props.activeOpacity || 0.8} 
-        onPress={this.toggleModal}
+        activeOpacity={this.props.activeOpacity || 0.8}
+        onPressIn={this._onPresIn}
+        onPressOut={this._onPressOut}
+        onPress={this.props.onPress}
       >
-        <Modal
-            visible={this.state.showModal}
-            onRequestClose={this.toggleModal}>
-            <Goal screenProps={{ toggle: this.toggleModal }} />
-        </Modal>
-  
+
         <Animated.View
           style={[
             styles.container,
@@ -138,10 +127,10 @@ export class ItemCard extends React.Component {
                 <TouchableWithoutFeedback onPress={this.props.onClose} >
                   <View style={{
                     position: 'absolute',
-                    top: 26,
-                    right: 26
+                    top: 15,
+                    left: 15
                   }}>
-                    {this.props.closeIcon || <Text>X</Text>}
+                    {this.props.closeIcon || <Text style={{fontSize: 30}}>X</Text>}
                   </View>  
                 </TouchableWithoutFeedback> : null
             }
@@ -150,11 +139,11 @@ export class ItemCard extends React.Component {
           {
             this.props.selected ?
               <View style={{flex: 1, padding: 20}}>
-                {this.props.content || <Text>COntent!</Text>}
+                {this.props.content || <Text>Content!</Text>}
               </View> : null
           }
         </Animated.View>
-      </TouchableOpacity>
+      </TouchableOpacity> 
     )
   }
 
