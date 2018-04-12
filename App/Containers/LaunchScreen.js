@@ -4,7 +4,7 @@ import { Card, Button, Header } from "react-native-elements";
 import { Images } from "../Themes";
 import ItemCard from "../Components/ItemCard";
 import CardList from "../Components/CardList";
-
+import BottomTabBar from "../Components/BottomTabBar";
 // Styles
 import styles from "./Styles/LaunchScreenStyles";
 
@@ -50,6 +50,8 @@ export default class LaunchScreen extends Component {
         />
         <StatusBar barStyle="light-content" hidden={false} />
         <CardList cards={cards} />
+
+        <BottomTabBar navigate={navigate}/>
       </View>
     );
   }
