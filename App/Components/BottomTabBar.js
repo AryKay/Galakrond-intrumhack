@@ -13,6 +13,13 @@ const navigationConfig = [
     onPress: "LaunchScreen"
   },
   {
+    icon: require("../Images/thunderbolt-round.png"),
+    onPress: "AskScreen",
+    style: {
+      width: 50, height: 50
+    }
+  },
+  {
     icon: require("../Images/bills-icon.png"),
     onPress: "BillsScreen"
   },
@@ -35,7 +42,7 @@ export default class BottomTabBar extends Component {
     const navigation = navigationConfig.map((tab, index) => {
       return (
         <TouchableOpacity key={index} onPress={() => navigate(tab.onPress)}>
-          <Image source={tab.icon} style={{ width: 24, height: 24, marginVertical: 10, marginHorizontal: 10 }} />
+          <Image source={tab.icon} style={[{ width: 24, height: 24, marginVertical: 10, marginHorizontal: 10 }, tab.style]} />
         </TouchableOpacity>
       );
     });

@@ -4,6 +4,7 @@ import LaunchScreen from '../Containers/LaunchScreen'
 import MorningScreen from '../Containers/MorningScreen'
 import BillsScreen from '../Containers/BillsScreen'
 import ProfileScreen from '../Containers/ProfileScreen'
+import AskScreen from '../Containers/AskScreen'
 
 import styles from './Styles/NavigationStyles'
 
@@ -13,7 +14,9 @@ const PrimaryNav = StackNavigator({
   LaunchScreen: { screen: LaunchScreen },
   MorningScreen: { screen: MorningScreen },
   BillsScreen: { screen: BillsScreen },
-  ProfileScreen: { screen: ProfileScreen }
+  ProfileScreen: { screen: ProfileScreen },
+  AskScreen: { screen: AskScreen },
+  
 }, {
   // Default config for all screens
   headerMode: 'none',
