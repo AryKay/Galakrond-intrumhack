@@ -1,10 +1,11 @@
-import React, { Component } from 'react'
-import { ScrollView, Text, Image, View, StatusBar } from 'react-native'
-import { Card, Button, Header } from 'react-native-elements'
-import { Images } from '../Themes'
-import ItemCard from '../Components/ItemCard'
-import CardList from '../Components/CardList'
+import React, { Component } from "react";
+import { ScrollView, Text, Image, View, StatusBar } from "react-native";
+import { Card, Button, Header } from "react-native-elements";
+import { Images } from "../Themes";
+import ItemCard from "../Components/ItemCard";
+import CardList from "../Components/CardList";
 import ProgressBar from '../Components/ProgressBar'
+import BottomTabBar from "../Components/BottomTabBar";
 
 // Styles
 import styles from "./Styles/LaunchScreenStyles";
@@ -57,6 +58,8 @@ export default class LaunchScreen extends Component {
         />
         <StatusBar barStyle="light-content" hidden={false} />
         <CardList cards={cards} />
+
+        <BottomTabBar navigate={navigate}/>
       </View>
     );
   }
