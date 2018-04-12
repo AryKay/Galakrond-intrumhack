@@ -1,32 +1,50 @@
 import React, { Component } from 'react'
-import { ScrollView, Text, Image, View } from 'react-native'
-import DevscreensButton from '../../ignite/DevScreens/DevscreensButton.js'
-
+import { ScrollView, Text, Image, View, StatusBar } from 'react-native'
+import { Card, Button, Header } from 'react-native-elements'
 import { Images } from '../Themes'
+import ItemCard from '../Components/ItemCard'
+import CardList from '../Components/CardList'
 
 // Styles
 import styles from './Styles/LaunchScreenStyles'
 
+// Mock Goal Data
+// TODO: Change component in ItemCard
+const cards = [
+  {
+    id: "0",
+    title: "Macbook Air",
+    picture: require('../Images/ir.png'),
+    content: <Text>Macbook Air</Text>
+  },
+  {
+    id: "1",
+    title: "Barcelona Trip",
+    picture: require('../Images/ir.png'),
+    content: <Text>Barcelona Trip</Text>
+  },
+  {
+    id: "2",
+    title: "Gucci Bag",
+    picture: require('../Images/ir.png'),
+    content: <Text>Gucci Bag</Text>
+  } 
+]
+
+// TODO: create buttons, replace header components with custom ones
 export default class LaunchScreen extends Component {
   render () {
     return (
       <View style={styles.mainContainer}>
-        <Image source={Images.background} style={styles.backgroundImage} resizeMode='stretch' />
-        <ScrollView style={styles.container}>
-          <View style={styles.centered}>
-            <Image source={Images.launch} style={styles.logo} />
-          </View>
-
-          <View style={styles.section} >
-            <Image source={Images.ready} />
-            <Text style={styles.sectionText}>
-              This probably isn't what your app is going to look like. Unless your designer handed you this screen and, in that case, congrats! You're ready to ship. For everyone else, this is where you'll see a live preview of your fully functioning app using Ignite.
-            </Text>
-          </View>
-
-          <DevscreensButton />
-        </ScrollView>
-      </View>
+      <Header
+  leftComponent={{ icon: 'menu', color: '#fff' }}
+  centerComponent={{ text: 'Goals', style: { color: '#fff' } }}
+  rightComponent={{ icon: 'home', color: '#fff' }}
+  outerContainerStyles={{ backgroundColor: '#000000' }}
+      />
+       <StatusBar barStyle = "light-content" hidden = {false}/>
+        <CardList cards={cards} />
+      </View> 
     )
   }
 }

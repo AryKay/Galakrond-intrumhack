@@ -1,5 +1,8 @@
 {
   "expoServerPort": 19000,
   "packagerPort": 19001,
-  "packagerPid": 14147
+  "packagerPid": 27599,
+  "expoServerNgrokUrl": "https://bd-dh8.arykay.intrumhack.exp.direct",
+  "packagerNgrokUrl": "https://packager.bd-dh8.arykay.intrumhack.exp.direct",
+  "ngrokPid": 27622
 }
